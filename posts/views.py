@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect, render_to_response
-from posts.models import Post
+from posts.models import Post, Favorit
 from usuaris.models import Perfil
 from django.contrib import messages
 from django.forms import modelform_factory
@@ -10,13 +10,20 @@ from django.http import HttpResponse
 from .forms import puja_partitura_form, puja_video_form
 
 
-def favorit(request, pk):
-    if request.method == 'POST':
-        postFavorit = Post.objects.get(pk=pk)
-        usuari = request.Perfil
-        usuari.favorit.add(favorit)
-        return redirect('usuaris:biblioteca')
-        
+def favorit(request, usuari_id, post_id):
+    usuari = Perfil.objects.get(id = usuari_id)
+    postActual = Post.objects.get(id = post_id)
+    preferit = Favorit.objects.create(usuari = usuari, postFavorit = postActual)
+    return redirect('usuaris:biblioteca')
+    
+def mur(request):
+    posts = Post.objects.all().order_by('?')[:30]
+    #usuaris_posts = Perfil
+    #seguits = Perfil.usuaris_seguits
+    ctx = {"posts_seguits":posts}
+    return render(request,"mur.html",ctx)
+    
+
 def puja_partitura(request, usuari_id):
     
     usuari_partitura = Perfil.objects.get(id=usuari_id)
@@ -63,10 +70,8 @@ def puja_video(request, usuari_id):
             
         return render (request, 'posts/puja_video.html', {'form':form})
         
-def mur(request, usuari_id):
-    posts = Post.objects.all().order_by('?')[:30]
-    usuaris_posts = Perfil
-    seguits = Perfil.usuaris_seguits
+
+    
     
     
     

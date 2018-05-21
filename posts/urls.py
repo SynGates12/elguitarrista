@@ -9,5 +9,6 @@ app_name='posts'
 urlpatterns = [
     url(r'^puja_partitura/', views.puja_partitura, name="puja_partitura"),
     url(r'^puja_video/', views.puja_video, name="puja_video"),
-    url(r'^mur/', views.mur, name="mur")
+    url(r'^mur/', views.mur, name="mur"),
+    url(r'^(?P<post_id>\d+)/favorit/', views.favorit, name="favorit")
 ]

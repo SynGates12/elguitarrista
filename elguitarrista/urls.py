@@ -21,5 +21,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^', include('usuaris.urls')),
-    url(r'^Perfil/', include('usuaris.urls'))
+    url(r'^Posts/', include('posts.urls')),
+
 ]

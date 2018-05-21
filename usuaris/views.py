@@ -31,7 +31,7 @@ def crear_usuari(request, perfil_id=None):
                 nou_usuari = User.objects.create_user( username = email, email = email, password = password )
                 
                 messages.info(request,"Usuari creat correctament")
-                return redirect('posts:index')
+                return redirect('usuaris:login')
     else:
         form = NouUsuariForm()
     
@@ -51,6 +51,12 @@ def biblioteca(request):
     posts_propis = request.user.perfil.posts.all();
     #posts_guardats = 
     ctx={}
+    
+def follow (request, usuari_id1, usuari_id2):
+    usuari = Perfil.objects.get(id = usuari_id1)
+    seguir = Perfil.objects.get(id = usuari_id2)
+    usuari.usuaris_seguits.add(seguir)
+    usuari.save()
 
 #loguejar usuari    
 def login(request):
@@ -68,7 +74,7 @@ def login(request):
                 authLogin( request, user )
                 next = request.GET.get('next')
                 messages.info(request,"Benvingut")
-                return redirect(next or 'posts:index')
+                return redirect('posts:mur')
 
             else:
                 messages.error(request,"Usuari o password incorrecte o usuari no actiu")
