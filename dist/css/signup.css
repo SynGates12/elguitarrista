@@ -1,0 +1,48 @@
+.content_signup{
+    margin:auto;
+    text-align:center;
+    padding:15px;
+    border-radius:5px;
+}
+
+.sign{
+    width:100%;
+}
+
+body{
+    background-image: url("/dist/images/blur.png");
+    background-position: center;
+    background-size: auto;
+    background-repeat:no-repeat;
+}
+
+.logoPetit{
+    background-image: url("/dist/images/logoG.png");
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:cover;
+    margin-left:auto;
+    margin-right:auto;
+    width:200px;
+    height:200px;
+}
+
+.textSign{
+    margin:auto;
+    text-align:center;
+    padding:15px;
+    border-radius:5px;
+}
+
+.text_sign{
+    text-align: justify;
+}
+
+.contSign{
+    background-color:rgb(255,255,255,0.7);
+    margin-top: 55px;
+    margin-left:10px;
+    margin-right: 10px;
+    border-radius:5px;
+    padding:20px;
+}
