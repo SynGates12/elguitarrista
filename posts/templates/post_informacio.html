@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %} Mur de {{user}} {% endblock %}
+{% block title %} {{post.nom}} {% endblock %}
 
 {% block extra-head %}
     {% load static %}
-    <link href="{% static "css/mur.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "css/puja_partitura.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "css/global.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}   
 
@@ -17,10 +17,10 @@
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href=#>Mur <span class="sr-only">(current)</span></a>
-              </li>
               <li class="nav-item">
+                <a class="nav-link" href="{% url "posts:mur" %}">Mur <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
                 <a class="nav-link" href="{% url "usuaris:biblioteca" %}">Biblioteca</a>
               </li>
               <li class="nav-item ">
@@ -28,6 +28,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url "posts:puja_video" user.pk %}">Pujar Video</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "usuaris:logout" %}"><span title="Logout" class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -41,9 +44,12 @@
         </nav>
         
         
-        
-      <div class="content_login">
+        <div class="content_login">
+            <h4>{{post.nom}}</h4>
+            <p>{{post.partitura|linebreaks}}</p>
+        </div>
+     
           
-      </div>
+        
 
 {% endblock %}   

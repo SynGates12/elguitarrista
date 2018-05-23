@@ -1,0 +1,35 @@
+.content_login{
+    padding: 20px;
+}
+
+.off{
+    background-image: url("/dist/images/off.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat;
+    width: 23px;
+    height: 23px;
+}
+
+.noPad{
+    padding:0px;
+    margin:0px;
+}
+
+.post{
+    background-color: #D9D8D2;
+    transition: transform 0.5s;
+}
+
+.post:hover{
+    opacity: 0.5;
+}
+
+.image-tab{
+    background-image:  url("/dist/images/tab.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat;
+    width:200px;
+    height:200px;
+}

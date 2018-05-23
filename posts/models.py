@@ -9,8 +9,8 @@ class Post(models.Model):
     partitura = models.TextField(null=True)
     video = models.FileField(upload_to='videos/', null=True, verbose_name="")
     usuari = models.ForeignKey('usuaris.Perfil', on_delete=models.SET_NULL, blank=True, null=True, related_name="post")
-    votsPositius = models.IntegerField()
-    votsNegatius = models.IntegerField()
+    votsPositius = models.IntegerField(blank=True, null=True)
+    votsNegatius = models.IntegerField(blank=True, null=True)
     
 class Favorit(models.Model):
     usuari = models.ForeignKey('usuaris.Perfil', on_delete=models.CASCADE)

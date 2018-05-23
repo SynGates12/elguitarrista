@@ -43,14 +43,16 @@ def crear_usuari(request, perfil_id=None):
     form.fields['email'].widget.attrs['required']="required"
     form.fields['password'].widget.attrs['required']="required"
     
-    return render(request, 'crear_usuari.html', {'form': form,} )
+    return render(request, 'crear_usuari.html', {'form': form} )
     
 
 #biblioteca
 def biblioteca(request):
-    posts_propis = request.user.perfil.posts.all();
-    #posts_guardats = 
-    ctx={}
+    user = Perfil.objects.get(usuari = request.user)
+    posts_propis = Post.objects.filter(usuari = user)
+    posts_guardats = Favorit.objects.filter(usuari = user ) 
+    ctx={"posts_propis" : posts_propis, "posts_guardats" : posts_guardats}
+    return render (request, "biblioteca.html", ctx)
     
 def follow (request, usuari_id1, usuari_id2):
     usuari = Perfil.objects.get(id = usuari_id1)

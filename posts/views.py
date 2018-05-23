@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .forms import puja_partitura_form, puja_video_form
 
 
@@ -23,6 +24,11 @@ def mur(request):
     ctx = {"posts_seguits":posts}
     return render(request,"mur.html",ctx)
     
+def post_informacio(request, post_id):
+    post = get_object_or_404(Post, pk = post_id)
+    ctx = {'post' : post}
+    return render (request, "post_informacio.html", ctx)
+    
 
 def puja_partitura(request, usuari_id):
     
@@ -35,17 +41,21 @@ def puja_partitura(request, usuari_id):
             nom = form.cleaned_data['nom']
             partitura = form.cleaned_data['partitura']
             
-            Post.objects.create(nom = nom, partitura = partitura)
+            Post.objects.create(nom = nom, partitura = partitura, usuari = usuari_partitura)
             messages.info(request, "Partitura pujada correctament")
             return redirect("usuaris:biblioteca")
             
-        else:
-            form = puja_partitura_form()
+    else:
+        form = puja_partitura_form()
         
-        for f in form.fields:
-            form.fields[f].widget.attrs['class'] = 'form-control'
-            
-        return render (request, 'posts/puja_partitura.html', {'form':form})
+    for f in form.fields:
+        form.fields[f].widget.attrs['class'] = 'form-control'
+        form.fields['nom'].widget.attrs['placeholder'] = 'Titol partitura'
+        form.fields['partitura'].widget.attrs['placeholder'] = 'Partitura'
+        form.fields['nom'].widget.attrs['required']="required"
+        form.fields['partitura'].widget.attrs['required']="required"
+        
+    return render (request, 'puja_partitura.html', {'form':form})
         
 def puja_video(request, usuari_id):
     
@@ -62,14 +72,32 @@ def puja_video(request, usuari_id):
             messages.info(request, "Video pujat correctament")
             return redirect("usuaris:biblioteca")
             
-        else: 
-            form = puja_video_form()
+    else: 
+        form = puja_video_form()
             
-        for f in form.fields:
-            form.fields[f].widget.attrs['class'] = 'form-control'
+    for f in form.fields:
+        form.fields[f].widget.attrs['class'] = 'form-control'
+        form.fields['nom'].widget.attrs['placeholder'] = 'Titol video'
+        form.fields['nom'].widget.attrs['required']="required"
+        form.fields['video'].widget.attrs['required']="required"
             
-        return render (request, 'posts/puja_video.html', {'form':form})
-        
+    return render (request, 'puja_video.html', {'form':form})
+
+def cerca(request):
+    query = request.GET.get('q', '')
+    if query:
+        qset = (
+            Q(nom__icontains=query)
+        )
+        results = Post.objects.filter(qset).distinct()
+    else:
+        results = []
+    return render( request, "posts/cerca.html",
+                                { "llista_posts": results,
+                                   "query": query }
+                               )
+
+       
 
     
     

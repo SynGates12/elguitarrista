@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %} Puja Video {% endblock %}
+
+{% block extra-head %}
+    {% load static %}
+    <link href="{% static "css/puja_partitura.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "css/global.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}   
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">El Guitarrista</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "posts:mur" %}">Mur <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "usuaris:biblioteca" %}">Biblioteca</a>
+              </li>
+              <li class="nav-item active ">
+                <a class="nav-link" href="{% url "posts:puja_partitura" user.pk %}">Pujar Partitura</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "posts:puja_video" user.pk %}">Pujar Video</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Cerca</button>
+            </form>
+            <li class="nav-link noPad">
+              <a class="nav-link" href="{% url "usuaris:logout"%}"> <div class ="off" title="Logout"></div> </a>
+            </li>
+          </div>
+        </nav>
+        
+        
+        
+      <div class="content_login">
+          <form class="puja_post" method="post" action="" enctype = "multipart/form-data">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+              <div class="form-group">
+                {{ field }}
+              </div>
+            {% endfor %}  
+            <button type="submit" class="btn btn-success envia">Enviar</button>
+          </form>
+      </div>
+
+{% endblock %}   
