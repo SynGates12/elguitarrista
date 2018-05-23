@@ -129,4 +129,4 @@ STATICFILES_DIRS = [
     ]
     
 MEDIA_ROOT = os.path.join(BASE_DIR, "pujades")
-MEDIA_URL = '/imatgespujades/'
+MEDIA_URL = '/videosPujats/'

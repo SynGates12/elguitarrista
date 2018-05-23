@@ -68,7 +68,7 @@ def puja_video(request, usuari_id):
             nom = form.cleaned_data['nom']
             video = form.cleaned_data['video']
             
-            Post.objects.create(nom = nom, video = video)
+            Post.objects.create(nom = nom, video = video, usuari = usuari_video)
             messages.info(request, "Video pujat correctament")
             return redirect("usuaris:biblioteca")
             

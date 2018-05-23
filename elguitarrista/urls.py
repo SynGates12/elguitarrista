@@ -23,4 +23,4 @@ urlpatterns = [
     url(r'^', include('usuaris.urls')),
     url(r'^Posts/', include('posts.urls')),
 
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
