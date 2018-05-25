@@ -45,16 +45,16 @@
         
         
         
-      <div class="content_login">
+      <div class="content_login content-biblio">
           
           <div class="posts-meus">
             <h4>Els teus posts</h4>
-            <div class="row">
+            <div class="row ">
               {% for post in posts_propis %}
                 <div class="col-md-4">
                   <div class="card post">
                     <a href="{% url "posts:post_informacio" post.pk %}">
-                      <img class="card-img-top" src="{% static "images/tab.png" %}" alt="Tab">
+                      <img class="card-img-top" src= {% if post.partitura %} "{% static "images/tab.png" %}" {% else %} "{% static "images/video.png" %}"  {% endif %}  alt="Tab">
                     </a>
                     <div class="card-body">
                       <h5 class="card-title"> {{ post.nom }}</h5>
@@ -66,9 +66,7 @@
             </div>
           </div>
 
-          
-          
-          
+
           
           
       </div>

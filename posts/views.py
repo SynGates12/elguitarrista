@@ -18,17 +18,22 @@ def favorit(request, usuari_id, post_id):
     return redirect('usuaris:biblioteca')
     
 def mur(request):
-    posts = Post.objects.all().order_by('?')[:30]
-    #usuaris_posts = Perfil
-    #seguits = Perfil.usuaris_seguits
-    ctx = {"posts_seguits":posts}
+    posts = Post.objects.all().order_by('?')[:30] 
+    usuari = Perfil.objects.get(usuari = request.user)
+    seguits = usuari.usuaris_seguits
+    tots =[]
+    for usuar in seguits.all():
+        usuari_actual = Perfil.objects.get(usuari = usuar.user)
+        ultim_post = Post.objects.latest(usuari = usuari_actual)
+        tots.append(ultim_post)
+    ctx = {"posts_seguits":tots, "posts_tots":posts}
     return render(request,"mur.html",ctx)
     
 def post_informacio(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     ctx = {'post' : post}
     return render (request, "post_informacio.html", ctx)
-    
+
 
 def puja_partitura(request, usuari_id):
     

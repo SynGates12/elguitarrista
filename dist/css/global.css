@@ -1,6 +1,8 @@
 .content_login{
     padding: 20px;
+    width:70% !important;
 }
+
 
 .off{
     background-image: url("/dist/images/off.png");
@@ -18,11 +20,39 @@
 
 .post{
     background-color: #D9D8D2;
-    transition: transform 0.5s;
+    margin-top:5px;
+}
+
+.card-body{
+    height: 100px;
 }
 
 .post:hover{
-    opacity: 0.5;
+    opacity: 0.7;
+    border: 1px solid skyblue;
+}
+
+.card-img-top{
+    height: 193.717px;
+}
+
+.video{
+    width:100%;
+    margin:auto;
+}
+
+.video-titol{
+    width:100%;
+    background-color: #242423;
+    color:white;
+    border: 1px solid #242423;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding:5px;
+}
+
+.video-post{
+    width:100%;
 }
 
 .image-tab{
@@ -32,4 +62,14 @@
     background-repeat:no-repeat;
     width:200px;
     height:200px;
+}
+
+.navbar-brand, .navbar-nav > li > a {
+    text-shadow: none !important;
+}
+
+
+.text-partitura{
+    font-family: Consolas,monaco,monospace; 
+    font-size: 15px;
 }

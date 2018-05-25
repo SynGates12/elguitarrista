@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 ROOT_URLCONF = 'elguitarrista.urls'
 
 TEMPLATES = [
@@ -128,5 +128,5 @@ STATICFILES_DIRS = [
  
     ]
     
-MEDIA_ROOT = os.path.join(BASE_DIR, "pujades")
-MEDIA_URL = '/videosPujats/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "dist/pujades")
+MEDIA_URL = '/videos/'

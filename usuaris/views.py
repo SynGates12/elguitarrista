@@ -54,6 +54,11 @@ def biblioteca(request):
     ctx={"posts_propis" : posts_propis, "posts_guardats" : posts_guardats}
     return render (request, "biblioteca.html", ctx)
     
+def usuari_informacio(request, usuari_id):
+    usuari = get_object_or_404(Perfil, pk = usuari_id)
+    ctx = {'usuari' : usuari}
+    return render (request, "usuari_informacio.html", ctx)
+
 def follow (request, usuari_id1, usuari_id2):
     usuari = Perfil.objects.get(id = usuari_id1)
     seguir = Perfil.objects.get(id = usuari_id2)

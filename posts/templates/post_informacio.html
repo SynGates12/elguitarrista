@@ -6,6 +6,7 @@
     {% load static %}
     <link href="{% static "css/puja_partitura.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "css/global.css" %}" rel="stylesheet" type="text/css">
+    <script src="http://api.html5media.info/1.1.5/html5media.min.js"></script>
 {% endblock %}   
 
 {% block content %}
@@ -45,12 +46,26 @@
         
         
         <div class="content_login">
-            <h4>{{post.nom}}</h4>
-            <p>{{post.partitura|linebreaks}}</p>
             
-            <video width="400" controls>
-                <source src="{{post.video}}" type="video/mp4">
-            </video>
+            
+            {% if post.partitura %}
+              <h4>{{post.nom}}</h4>
+              <div class="text-partitura">
+                {{post.partitura|linebreaks}}
+              </div>
+            {% else %}  
+            
+            <div class="video">
+              <div class="video-titol"><h5>{{post.nom}}</h5></div>
+              <video class="video-post" src="/dist/pujades/{{post.video}}" controls>
+                <source src="/dist/pujades/{{post.video}}"></source>
+              </video>
+            </div>
+              
+
+            {% endif %}
+            
+
         </div>
      
           

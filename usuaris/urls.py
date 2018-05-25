@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^crear/', views.crear_usuari,name="crear_usuari"),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^biblioteca/$', views.biblioteca, name='biblioteca'),
+    url(r'^usuari_informacio/(?P<usuari_id>\d+)$', views.usuari_informacio, name="usuari_informacio"),
     url(r'^(?P<usuari_id>\d+)/follow/$', views.follow, name='follow')
 ]
