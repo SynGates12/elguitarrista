@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %} {{post.nom}} {% endblock %}
+{% block title %} {{usuari_visitat.usuari}} {% endblock %}
 
 {% block extra-head %}
     {% load static %}
     <link href="{% static "css/puja_partitura.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "css/global.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "css/biblioteca.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}   
 
 {% block content %}
@@ -46,8 +47,36 @@
         
         <div class="content_login">
             
-            
+            <div class="row">
+              <div class="col-md-5">
+                 <h3>Posts de {{usuari_visitat.usuari}}</h3>
+              </div>
+              
+              {% if segueix %}
+                <div class="col-md-7 boto-seguir">
+                  <div class="btn btn-danger seguir"><a href="{% url "usuaris:unfollow" usuari_visitat.id %}">Desubscriu-te</a></div>
+                </div>
+              {% else %}  
+                <div class="col-md-7 boto-seguir">
+                  <div class="btn btn-danger seguir"><a href="{% url "usuaris:follow" usuari_visitat.id %}">Subscriu-te</a></div>
+                </div>
+              {% endif %}
+            </div>
            
+            <div class="row">
+              {% for post in posts_usuari %}
+                <div class="col-md-4">
+                    <div class="card post">
+                      <a href="{% url "posts:post_informacio" post.pk %}">
+                        <img class="card-img-top" src= {% if post.partitura %} "{% static "images/tab.png" %}" {% else %} "{% static "images/video.png" %}"  {% endif %}  alt="Tab">
+                      </a>
+                      <div class="card-body">
+                        <h5 class="card-title"> {{ post.nom }}</h5>
+                      </div>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
             
 
         </div>

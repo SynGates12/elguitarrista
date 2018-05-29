@@ -12,6 +12,7 @@ from django.contrib.auth import ( login as authLogin,
                                   authenticate,
                                   logout as authLogout )
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 #CREAR USUARI -------
 def crear_usuari(request, perfil_id=None):
@@ -47,6 +48,7 @@ def crear_usuari(request, perfil_id=None):
     
 
 #biblioteca
+@login_required (login_url='usuaris:login')
 def biblioteca(request):
     user = Perfil.objects.get(usuari = request.user)
     posts_propis = Post.objects.filter(usuari = user)
@@ -54,17 +56,35 @@ def biblioteca(request):
     ctx={"posts_propis" : posts_propis, "posts_guardats" : posts_guardats}
     return render (request, "biblioteca.html", ctx)
     
+@login_required (login_url='usuaris:login')
 def usuari_informacio(request, usuari_id):
-    usuari = get_object_or_404(Perfil, pk = usuari_id)
-    ctx = {'usuari' : usuari}
+    meuPerfil = request.user.perfil
+    usuari_visitat = get_object_or_404(Perfil, pk = usuari_id)
+    posts_usuari = Post.objects.filter(usuari = usuari_visitat)
+    seguits = meuPerfil.usuaris_seguits
+    segueix = False
+    for perfil_seguidor in seguits.all():
+        if perfil_seguidor.id == usuari_visitat.id:
+            segueix = True
+        
+    ctx = {'usuari_visitat' : usuari_visitat, 'posts_usuari' : posts_usuari, 'segueix' : segueix}
     return render (request, "usuari_informacio.html", ctx)
 
-def follow (request, usuari_id1, usuari_id2):
-    usuari = Perfil.objects.get(id = usuari_id1)
-    seguir = Perfil.objects.get(id = usuari_id2)
+@login_required (login_url='usuaris:login')
+def follow (request, usuari_id):
+    usuari = Perfil.objects.get(usuari = request.user)
+    seguir = Perfil.objects.get(id = usuari_id)
     usuari.usuaris_seguits.add(seguir)
     usuari.save()
+    return redirect('posts:mur')
 
+@login_required (login_url='usuaris:login')
+def unfollow (request, usuari_id):
+    usuari = Perfil.objects.get(usuari = request.user)
+    seguir = Perfil.objects.get(id = usuari_id)
+    usuari.usuaris_seguits.remove(seguir)
+    usuari.save()
+    return redirect('posts:mur')
 #loguejar usuari    
 def login(request):
 

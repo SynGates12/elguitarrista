@@ -46,7 +46,14 @@
         
         
         <div class="content_login">
+            {% if es_fav %}
+              <div class="btn btn-danger seguir"><a href="{% url "posts:unfav" post.id %}">Desafegir</a></div>
+              
+            {% else %}
             
+              <div class="btn btn-danger seguir"><a href="{% url "posts:favorit" post.id %}">Afageix a favorits</a></div>
+            
+            {% endif %}
             
             {% if post.partitura %}
               <h4>{{post.nom}}</h4>
@@ -64,6 +71,36 @@
               
 
             {% endif %}
+            
+              <div id="coments">
+               <h4>Comentaris<small> • {{comentari.count}}</small></h4>
+                <div id="formulari_comenta">
+                    <form action="" method="post"> {% csrf_token %}
+                       {% for field in form %}
+                                    <div class="form-group">
+                           {{ field }}
+                        </div>
+                    {% endfor %}
+    	              
+                 <input type="submit" class="formulari boto btn btn-primary" value="Envia">
+                 </form>  
+                    
+                </div>
+                <div id="comentaris">
+                    
+                    {% for com in comentari %}
+                       <div class="comentari"> 
+                            <div class="coment-1">
+                                <div class="usuari"><h4>{{com.usuari.usuari}}</h4></div>
+                                <div class="data"><h4><small>{{com.data}}</small></h4></div>
+                            </div>
+                            <div class="text">{{com.text}}</div>
+                        </div>
+                    {% endfor %}    
+                    
+                    
+                </div>
+            </div>
             
 
         </div>

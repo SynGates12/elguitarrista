@@ -3,6 +3,9 @@
     width:70% !important;
 }
 
+.boto-seguir{
+    text-align: right;
+}
 
 .off{
     background-image: url("/dist/images/off.png");

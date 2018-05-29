@@ -6,6 +6,7 @@
     {% load static %}
     <link href="{% static "css/mur.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "css/global.css" %}" rel="stylesheet" type="text/css">
+    <script src="{% static "js/boto.js" %}"></script>
 {% endblock %}   
 
 {% block content %}
@@ -30,8 +31,8 @@
                 <a class="nav-link" href="{% url "posts:puja_video" user.pk %}">Pujar Video</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
+            <form action = "{% url "posts:cerca" %}"  method="get" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" name="q" placeholder="Cerca" aria-label="Search">
               <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Cerca</button>
             </form>
             <li class="nav-link noPad">
@@ -44,22 +45,66 @@
         
       <div class="content-mur">
           
-          <div class="row">
+        <div class="row">
             <div class="col-md-2 subs">
               <div class="row">
                 <ul class="list-group llista-subs">
                   <li class="list-group-item list-group-item-dark"><h5>Subscripcions</h5></li>
-                  <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
-                  <li class="list-group-item list-group-item-action">Morbi leo risus</li>
-                  <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
-                  <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
+                  
+                  {% if posts_seguits %}
+                    {% for seg in seguits.all %}
+                      <li class="list-group-item list-group-item-action"><a href="{% url "usuaris:usuari_informacio" seg.usuari_id %}">{{seg.usuari}}</a></li>
+                    {% endfor %}  
+                  {% else %}
+                    <li class="list-group-item list-group-item-actio"><p class="text-muted">Encara no segueixes a ningú...</p></li>
+                  {% endif %}
                 </ul>
               </div>
               
             </div>
             <div class="col-md-9 posts">
-              {% if user.usuaris_seguits %}
-                segueixes algu
+              {% if user.perfil.is_admin %}
+                <a href="{% url "posts:fer_backups" 1 %}"><button type="button" class = "btn btn-default"> Fer backup posts</button></a>
+                <a href="{% url "posts:fer_backups" 2 %}"><button type="button" class = "btn btn-default"> Fer backup usuaris</button></a>
+              {% endif %}
+              {% if posts_seguits %}
+              <h3>Subscripcions</h3>
+               {% for posts in posts_seguits %}
+                 {% for post in posts.all %}
+                 <div class="row post-tot">
+                    <div class="col-md-4 imatge_post ">
+                      <img class="card-img-top post-mur" src= {% if post.partitura %} "{% static "images/tab.png" %}" {% else %} "{% static "images/video.png" %}"  {% endif %}  alt="Tab">
+                    </div>
+                    <div class="col-md-8 usuari-post">
+                      <div class="user_post"><h4><a href="{% url "usuaris:usuari_informacio" post.usuari_id %}" >{{post.usuari.usuari}}</a> {% if post.partitura %} ha pujat una partitura {% else %} ha pujat un video {% endif %}</h4></div>
+                      <a href="{% url "posts:post_informacio" post.pk %}">
+                      <div class="text">
+                        <div class="post_name"><h3>{{post.nom}}</h3></div>
+                        <div class="text-post">{% if post.partitura %} Mira la partitura ara i aprén la cançó! {% else %} Mira el video ara! {% endif %}</div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                 {% endfor %}
+               {% endfor %}
+               <h3>Altres posts</h3>
+                {% for posts in posts_tots %}
+                  <div class="row post-tot">
+                    <div class="col-md-4 imatge_post ">
+                      <img class="card-img-top post-mur" src= {% if posts.partitura %} "{% static "images/tab.png" %}" {% else %} "{% static "images/video.png" %}"  {% endif %}  alt="Tab">
+                    </div>
+                    <div class="col-md-8 usuari-post">
+                      <div class="user_post"><h4><a href="{% url "usuaris:usuari_informacio" posts.usuari_id %}" >{{posts.usuari.usuari}}</a> {% if posts.partitura %} ha pujat una partitura {% else %} ha pujat un video {% endif %}</h4></div>
+                      <a href="{% url "posts:post_informacio" posts.pk %}">
+                      <div class="text">
+                        <div class="post_name"><h3>{{posts.nom}}</h3></div>
+                        <div class="text-post">{% if posts.partitura %} Mira la partitura ara i aprén la cançó! {% else %} Mira el video ara! {% endif %}</div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  
+               {% endfor %}
               {% else %}
                 {% for posts in posts_tots %}
                   <div class="row post-tot">
@@ -85,7 +130,11 @@
               
             </div>
           </div>
-          
+             
       </div>
+      
+      <div id="adalt">
+                 <span class="glyphicon glyphicon-menu-up" title="amunt" aria-hidden="true">dfasdfasd</span>
+             </div>
 
 {% endblock %}   

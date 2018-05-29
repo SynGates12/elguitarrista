@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object model="usuaris.perfil" pk="1">
+    <field name="usuari" rel="OneToOneRel" to="auth.user">1</field>
+    <field name="image" type="FileField"></field>
+    <field name="is_admin" type="BooleanField">True</field>
+    <field name="usuaris_seguits" rel="ManyToManyRel" to="usuaris.perfil"></field>
+  </object>
+  <object model="usuaris.perfil" pk="2">
+    <field name="usuari" rel="OneToOneRel" to="auth.user">2</field>
+    <field name="image" type="FileField"></field>
+    <field name="is_admin" type="BooleanField">False</field>
+    <field name="usuaris_seguits" rel="ManyToManyRel" to="usuaris.perfil"></field>
+  </object>
+  <object model="usuaris.perfil" pk="3">
+    <field name="usuari" rel="OneToOneRel" to="auth.user">3</field>
+    <field name="image" type="FileField"></field>
+    <field name="is_admin" type="BooleanField">False</field>
+    <field name="usuaris_seguits" rel="ManyToManyRel" to="usuaris.perfil"></field>
+  </object>
+  <object model="usuaris.perfil" pk="4">
+    <field name="usuari" rel="OneToOneRel" to="auth.user">4</field>
+    <field name="image" type="FileField"></field>
+    <field name="is_admin" type="BooleanField">False</field>
+    <field name="usuaris_seguits" rel="ManyToManyRel" to="usuaris.perfil"></field>
+  </object>
+  <object model="usuaris.perfil" pk="5">
+    <field name="usuari" rel="OneToOneRel" to="auth.user">5</field>
+    <field name="image" type="FileField"></field>
+    <field name="is_admin" type="BooleanField">False</field>
+    <field name="usuaris_seguits" rel="ManyToManyRel" to="usuaris.perfil"><object pk="2"></object><object pk="4"></object></field>
+  </object>
+  <object model="usuaris.comentari" pk="1">
+    <field name="data" type="DateField">2018-05-29</field>
+    <field name="text" type="CharField">Bona tab amic!!!</field>
+    <field name="post" rel="ManyToOneRel" to="posts.post">4</field>
+    <field name="usuari" rel="ManyToOneRel" to="usuaris.perfil">2</field>
+  </object>
+</django-objects>

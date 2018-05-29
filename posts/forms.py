@@ -12,3 +12,6 @@ class puja_partitura_form (forms.Form):
 class puja_video_form (forms.Form):
     nom = forms.CharField(max_length=120)
     video = forms.FileField()
+    
+class ComentaForm(forms.Form):
+    text=forms.CharField(label="Comenta...",widget=forms.Textarea)
