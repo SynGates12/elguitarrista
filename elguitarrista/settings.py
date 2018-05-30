@@ -10,6 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
+
+import django_heroku
+TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
