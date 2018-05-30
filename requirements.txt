@@ -9,7 +9,6 @@ django-model-utils==2.6.1
 html5lib==0.999
 httplib2==0.8
 keyring==3.5
-lazr.restfulclient==0.13.3
 lazr.uri==1.0.3
 lockfile==0.8
 lpthw.web==1.1
