@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^cerca/', views.cerca, name="cerca"),
     url(r'^(?P<post_id>\d+)/favorit/', views.favorit, name="favorit"),
     url(r'^(?P<post_id>\d+)/unfav/', views.unfav, name="unfav"),
-    url(r'^(?P<id_backup>\d+)/fer_backups/$', views.fer_backups, name="fer_backups")
+    url(r'^(?P<id_backup>\d+)/fer_backups/$', views.fer_backups, name="fer_backups"),
+    url(r'^(?P<post_id>\d+)/eliminar_post/', views.eliminar_post, name="eliminar_post"),
+    url(r'^(?P<favorit_id>\d+)/apres/', views.apres, name="apres")
 ]

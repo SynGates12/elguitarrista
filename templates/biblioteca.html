@@ -59,6 +59,8 @@
                       </a>
                       <div class="card-body">
                         <h5 class="card-title"> {{ post.nom }}</h5>
+                        <a href="{% url "posts:eliminar_post" post.id %}"><button class="btn btn-danger btnEliminiar">Eliminar Post</button></a>
+
                       </div>
                     </div>
                   </div>
@@ -102,6 +104,36 @@
                     </div>
                   </div>
               {% endif %}
+              
+              
+                  <div class="content_login content-biblio">  
+                   <div class="posts-favorits">
+                  <h3>Posts Apresos</h3>
+                  <div class="row">
+                {% for favorit in posts_guardats %}
+                   {% if favorit.apres %}
+                    
+                   
+                     
+                   
+                      <div class="col-md-4">
+                          <div class="card post">
+                            <a href="{% url "posts:post_informacio" favorit.postFavorit.pk %}">
+                              <img class="card-img-top" src= {% if favorit.postFavorit.partitura %} "{% static "images/tab.png" %}" {% else %} "{% static "images/video.png" %}"  {% endif %}  alt="Tab">
+                            </a>
+                            <div class="card-body">
+                              <h5 class="card-title"> {{favorit.postFavorit.nom}}</h5>
+                            </div>
+                          </div>
+                        </div>
+                        
+                    
+                 
+                        {% endif %}
+                      {% endfor %}
+                      </div>
+</div>
+               </div>
             
           
 

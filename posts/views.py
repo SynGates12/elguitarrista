@@ -41,8 +41,9 @@ def mur(request):
 def post_informacio(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     meuPerfil = Perfil.objects.get(usuari = request.user)
-    es_fav = Favorit.objects.filter(postFavorit = post, usuari = meuPerfil)
-    
+    es_fav = Favorit.objects.filter(postFavorit = post, usuari = meuPerfil).count()
+    if es_fav == 1:
+        es_fav = Favorit.objects.get(postFavorit = post, usuari = meuPerfil)
     
     if request.user:
         usuari = request.user
@@ -159,3 +160,22 @@ def fer_backups(request, id_backup):
         return HttpResponseRedirect(reverse('posts:mur'))
     else:
         return HttpResponseRedirect(reverse('posts:biblioteca'))
+        
+        
+@login_required (login_url='usuaris:login')
+def eliminar_post (request, post_id = None):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk = post_id)
+        if (post_id):
+            post.delete()
+            return redirect('usuaris:biblioteca')
+    else:
+        return render(request, 'eliminar_post.html', {'Post' : Post.objects.get(pk=post_id)})
+        
+
+@login_required (login_url='usuaris:login')
+def apres (request, favorit_id):
+    favorit_actual = Favorit.objects.get(id = favorit_id)
+    favorit_actual.apres = True
+    favorit_actual.save()
+    return redirect("usuaris:biblioteca")
