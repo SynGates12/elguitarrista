@@ -25,7 +25,7 @@ SECRET_KEY = '!_mtm6%3tx+bc=hvo$=vwsiglj(%*$((q-054a^0zs^mrnihwi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['guitarrista.herokuapp.com']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
