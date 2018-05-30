@@ -30,8 +30,8 @@
                 <a class="nav-link" href="{% url "posts:puja_video" user.pk %}">Pujar Video</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Cerca" aria-label="Search">
+            <form action = "{% url "posts:cerca" %}"  method="get" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" name="q" placeholder="Cerca" aria-label="Search">
               <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Cerca</button>
             </form>
             <li class="nav-link noPad">
