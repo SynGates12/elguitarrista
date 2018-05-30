@@ -1,0 +1,54 @@
+.content_login{
+    margin:auto;
+    text-align:center;
+    padding:15px;
+    border-radius:5px;
+    margin-top:50px;
+    background-color:rgb(255,255,255,0.7);
+}
+
+.signup>a{
+    color:white;
+}
+
+.sign{
+    width:100%;
+}
+
+.signup{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.signin {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.logoPetit{
+    background-image: url("/dist/images/logoG.png");
+    background-repeat:no-repeat;
+    background-position: center; 
+    background-size:cover;
+    margin-left:auto;
+    margin-right:auto;
+    width:200px;
+    height:200px;
+}
+
+body{
+    background-image: url("/dist/images/blur.png");
+    background-position: center;
+    background-size: auto;
+    background-repeat:no-repeat;
+}
+
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 900px; */
+       .content_login{
+            width:25%;
+        }
+         
+}
+
+

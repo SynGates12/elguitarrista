@@ -1,0 +1,56 @@
+body{
+    background:#242423;
+}
+
+.content_login{
+    margin:auto;
+    width: 90%;
+}
+
+.subs, .posts{
+    margin:5px;
+    border-radius:5px;
+}
+
+.posts{
+    background:white;
+    margin:5px;
+    border-radius:5px;
+    padding:35px;
+}
+
+.post-mur{
+    border: 2px solid #343A40;
+    border-bottom-left-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.usuari-post{
+    margin: 0px;
+    border: 2px solid #343A40;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #343A40;
+    color: white;
+}
+.text{
+    margin-top:30px;
+}
+
+.post-tot{
+    padding: 23px !important;
+}
+
+.imatge_post{
+    padding:0px;
+}
+
+.llista-subs{
+    width: 100%;
+}
+ 
+.content-mur{
+    padding:30px;
+}

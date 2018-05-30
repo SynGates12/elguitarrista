@@ -1,0 +1,29 @@
+body{
+    background:#242423;
+}
+
+.content_login{
+    width:100%;
+    margin:auto;
+    padding:10px;
+    background:white;
+    margin-top:20px;
+    border-radius:5px;
+}
+
+.envia{
+    margin:auto;
+    width:100%;
+}
+
+.glip{
+    color:white;
+}
+
+@media only screen and (min-width:900px){
+        /* styles for browsers larger than 900px; */
+       .content_login{
+            width:60%;
+        }
+         
+}
